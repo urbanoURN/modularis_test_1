@@ -1,9 +1,7 @@
 import { EmployeeViewModel } from './viewmodels/EmployeeViewModel.js';
 import { EmployeeView } from './views/EmployeeView.js';
 
-/**
- * Punto de entrada de la aplicación
- */
+
 class App {
   private viewModel: EmployeeViewModel;
   private view: EmployeeView;
@@ -18,7 +16,7 @@ class App {
   }
 }
 
-//Inicializar SOLO cuando el DOM esté completamente cargado
+//Initialize ONLY when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
   const app = new App();
   app.start();

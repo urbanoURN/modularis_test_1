@@ -1,10 +1,10 @@
 /**
  * Employee Model
- * Representa la estructura de datos de un empleado
+ * Represents the data structure of an employee
  */
 export interface Employee {
-  id: string;              // PersonID de la API
-  employeeNo: string;      // EmployeeNo de la API (se muestra en la tabla)
+  id: string;              
+  employeeNo: string;      
   ssn: string;
   firstName: string;
   lastName: string;
@@ -12,10 +12,10 @@ export interface Employee {
 }
 
 /**
- * Datos para crear un empleado
+ * Data to create an employee
  */
 export interface CreateEmployeeDto {
-  employeeNo: string;      // Ahora es editable por el usuario
+  employeeNo: string;      
   ssn: string;
   firstName: string;
   lastName: string;
@@ -23,10 +23,10 @@ export interface CreateEmployeeDto {
 }
 
 /**
- * Datos para actualizar un empleado
+ * Data to maintain an employee
  */
 export interface UpdateEmployeeDto {
-  employeeNo?: string;     // Ahora es editable por el usuario
+  employeeNo?: string;     
   ssn?: string;
   firstName?: string;
   lastName?: string;
@@ -34,7 +34,7 @@ export interface UpdateEmployeeDto {
 }
 
 /**
- * Respuesta de la API
+ * API Response
  */
 export interface ApiResponse<T> {
   success: boolean;

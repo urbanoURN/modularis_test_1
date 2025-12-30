@@ -10,7 +10,7 @@ export class ApiModularis {
   private readonly API_KEY = '3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP';
 
   /**
-   * Headers para todas las peticiones
+   * API - Headers for all requests
    */
   private getHeaders(): HeadersInit {
     return {
@@ -21,7 +21,7 @@ export class ApiModularis {
   }
 
   /**
-   * Convierte datos de Modularis a nuestro modelo
+   * Convert data from Modularis to our model
    */
   private toEmployee(data: any): Employee {
     return {
@@ -35,7 +35,7 @@ export class ApiModularis {
   }
 
   /**
-   * Convierte nuestro modelo a formato Modularis
+   * Convert our model to Modularis format
    */
   private toModularisFormat(employee: CreateEmployeeDto | UpdateEmployeeDto, personId?: string): any {
     const employeeNo = String(Math.floor(Math.random() * 9000) + 1000);
@@ -55,7 +55,7 @@ export class ApiModularis {
   }
 
   /**
-   * Genera un GUID único
+   * Generates a unique GUID
    */
   private generateGuid(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -66,23 +66,19 @@ export class ApiModularis {
   }
 
   /**
-   * GET - Obtener todos los empleados
+   * GET - Obtain all employees
    */
   async getAllEmployees(): Promise<ApiResponse<Employee[]>> {
     try {
-      console.log('🔄 Fetching employees from API...');
-      console.log('URL:', this.BASE_URL);
       
       const response = await fetch(this.BASE_URL, {
         method: 'GET',
         headers: this.getHeaders()
       });
 
-      console.log('📡 Response status:', response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', errorText);
         return {
           success: false,
           error: `Error ${response.status}: ${response.statusText}. ${errorText}`
@@ -90,12 +86,10 @@ export class ApiModularis {
       }
 
       const data = await response.json();
-      console.log('✅ Data received:', data);
       
       const employees = Array.isArray(data) ? data : (data.value || []);
       
       if (employees.length === 0) {
-        console.warn('⚠️ No employees found in the response');
       }
       
       return {
@@ -104,7 +98,6 @@ export class ApiModularis {
         message: 'Employees retrieved successfully'
       };
     } catch (error) {
-      console.error('❌ Network error:', error);
       return {
         success: false,
         error: 'Network error. Please check your connection and CORS settings.'
@@ -113,12 +106,11 @@ export class ApiModularis {
   }
 
   /**
-   * GET - Obtener un empleado por ID
+   * GET - Get an employee by ID
    */
   async getEmployeeById(id: string): Promise<ApiResponse<Employee>> {
     try {
       const url = `${this.BASE_URL}(${id})`;
-      console.log('🔄 Fetching employee:', url);
       
       const response = await fetch(url, {
         method: 'GET',
@@ -134,7 +126,6 @@ export class ApiModularis {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', errorText);
         return {
           success: false,
           error: `Error ${response.status}: ${response.statusText}`
@@ -149,7 +140,6 @@ export class ApiModularis {
         message: 'Employee retrieved successfully'
       };
     } catch (error) {
-      console.error('❌ Network error:', error);
       return {
         success: false,
         error: 'Network error'
@@ -158,7 +148,7 @@ export class ApiModularis {
   }
 
   /**
-   * POST - Crear un nuevo empleado
+   * POST - Create a new employee
    */
   async createEmployee(employeeData: CreateEmployeeDto): Promise<ApiResponse<Employee>> {
     try {
@@ -170,14 +160,13 @@ export class ApiModularis {
         LastName: employeeData.lastName,
         SSN: employeeData.ssn,
         Status: employeeData.isActive ? 1 : 0,
-        EmployeeNo: employeeData.employeeNo,  // Usar el valor del usuario
+        EmployeeNo: employeeData.employeeNo,   
         EmploymentStartDate: new Date().toISOString(),
         EmploymentEndDate: null,
         LastUpdatedBy: 'admin',
         LastUpdatedDate: new Date().toISOString()
       };
       
-      console.log('🔄 Creating employee:', payload);
 
       const response = await fetch(this.BASE_URL, {
         method: 'POST',
@@ -187,7 +176,6 @@ export class ApiModularis {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', errorText);
         
         if (errorText.includes('duplicate') || errorText.includes('exists')) {
           return {
@@ -203,7 +191,6 @@ export class ApiModularis {
       }
 
       const data = await response.json();
-      console.log('✅ Employee created:', data);
       
       return {
         success: true,
@@ -211,7 +198,6 @@ export class ApiModularis {
         message: 'Employee created successfully'
       };
     } catch (error) {
-      console.error('❌ Error creating employee:', error);
       return {
         success: false,
         error: 'Failed to create employee'
@@ -220,7 +206,7 @@ export class ApiModularis {
   }
 
   /**
-   * PUT - Actualizar un empleado
+   * PUT - Maintain an employee
    */
   async updateEmployee(id: string, employeeData: UpdateEmployeeDto): Promise<ApiResponse<Employee>> {
     try {
@@ -244,14 +230,13 @@ export class ApiModularis {
         LastName: updatedData.lastName,
         SSN: updatedData.ssn,
         Status: updatedData.isActive ? 1 : 0,
-        EmployeeNo: updatedData.employeeNo,  // Usar el valor del usuario
+        EmployeeNo: updatedData.employeeNo, 
         EmploymentStartDate: new Date().toISOString(),
         EmploymentEndDate: null,
         LastUpdatedBy: 'admin',
         LastUpdatedDate: new Date().toISOString()
       };
       
-      console.log('🔄 Updating employee:', payload);
 
       const response = await fetch(this.BASE_URL, {
         method: 'PUT',
@@ -261,7 +246,6 @@ export class ApiModularis {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', errorText);
         
         if (errorText.includes('duplicate') || errorText.includes('exists')) {
           return {
@@ -277,7 +261,6 @@ export class ApiModularis {
       }
 
       const data = await response.json();
-      console.log('✅ Employee updated:', data);
       
       return {
         success: true,
@@ -285,7 +268,6 @@ export class ApiModularis {
         message: 'Employee updated successfully'
       };
     } catch (error) {
-      console.error('❌ Error updating employee:', error);
       return {
         success: false,
         error: 'Failed to update employee'
@@ -294,12 +276,11 @@ export class ApiModularis {
   }
 
   /**
-   * DELETE - Eliminar un empleado
+   * DELETE - Delete an employee
    */
   async deleteEmployee(id: string): Promise<ApiResponse<null>> {
     try {
       const url = `${this.BASE_URL}(${id})`;
-      console.log('🔄 Deleting employee:', url);
       
       const response = await fetch(url, {
         method: 'DELETE',
@@ -315,14 +296,12 @@ export class ApiModularis {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('❌ API Error:', errorText);
         return {
           success: false,
           error: `Error ${response.status}: ${response.statusText}`
         };
       }
 
-      console.log('✅ Employee deleted successfully');
       
       return {
         success: true,
@@ -330,7 +309,6 @@ export class ApiModularis {
         message: 'Employee deleted successfully'
       };
     } catch (error) {
-      console.error('❌ Error deleting employee:', error);
       return {
         success: false,
         error: 'Failed to delete employee'

@@ -3,7 +3,7 @@ import { ApiModularis } from '../services/apiModularis.js';
 
 /**
  * Employee ViewModel
- * Maneja la lógica de negocio y conecta la Vista con el Modelo
+ * Handles business logic and connects the View to the Model
  */
 export class EmployeeViewModel {
   private apiService: ApiModularis;
@@ -12,7 +12,7 @@ export class EmployeeViewModel {
   private isLoading: boolean = false;
   private errorMessage: string = '';
 
-  // Callbacks para actualizar la vista
+  // Callbacks to update the view
   private onEmployeesChanged?: (employees: Employee[]) => void;
   private onLoadingChanged?: (isLoading: boolean) => void;
   private onError?: (message: string) => void;
@@ -23,7 +23,7 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Registra callbacks para actualizar la vista
+   * Register callbacks to update the view
    */
   registerCallbacks(callbacks: {
     onEmployeesChanged?: (employees: Employee[]) => void;
@@ -38,7 +38,7 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Establece el estado de carga
+   * Sets the state of charge
    */
   private setLoading(loading: boolean): void {
     this.isLoading = loading;
@@ -46,7 +46,7 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Muestra un mensaje de error
+   * Displays an error message
    */
   private showError(message: string): void {
     this.errorMessage = message;
@@ -54,21 +54,21 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Muestra un mensaje de éxito
+   * Displays a message of success
    */
   private showSuccess(message: string): void {
     this.onSuccess?.call(this, message);
   }
 
   /**
-   * Notifica cambios en la lista de empleados
+   * Notifies changes in the list of employees
    */
   private notifyEmployeesChanged(): void {
     this.onEmployeesChanged?.call(this, this.employees);
   }
 
   /**
-   * Carga todos los empleados
+   *  Load all employees
    */
   async loadEmployees(): Promise<void> {
     this.setLoading(true);
@@ -86,7 +86,7 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Carga un empleado específico por ID
+   * Load a specific employee by ID
    */
   async loadEmployee(id: string): Promise<Employee | null> {
     this.setLoading(true);
@@ -105,10 +105,9 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Crea un nuevo empleado
+   * Create a new employee
    */
   async createEmployee(employeeData: CreateEmployeeDto): Promise<boolean> {
-    // Validaciones
     const validation = this.validateEmployeeData(employeeData);
     if (!validation.valid) {
       this.showError(validation.message);
@@ -132,10 +131,9 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Actualiza un empleado existente
+   * Upgrade an existing employee
    */
   async updateEmployee(id: string, employeeData: UpdateEmployeeDto): Promise<boolean> {
-    // Validaciones
     const validation = this.validateEmployeeData(employeeData);
     if (!validation.valid) {
       this.showError(validation.message);
@@ -159,7 +157,7 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Elimina un empleado
+   * Deletes an employee
    */
   async deleteEmployee(id: string): Promise<boolean> {
     this.setLoading(true);
@@ -179,10 +177,9 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Valida los datos del empleado
+   * Validates employee data
    */
   private validateEmployeeData(data: CreateEmployeeDto | UpdateEmployeeDto): { valid: boolean; message: string } {
-    // Validar Employee No (ID)
     if ('employeeNo' in data && data.employeeNo !== undefined) {
       if (!data.employeeNo.trim()) {
         return { valid: false, message: 'ID is required' };
@@ -228,21 +225,21 @@ export class EmployeeViewModel {
   }
 
   /**
-   * Obtiene la lista actual de empleados
+   * Gets the current list of employees
    */
   getEmployees(): Employee[] {
     return this.employees;
   }
 
   /**
-   * Obtiene el empleado actual
+   * Gets the current employee
    */
   getCurrentEmployee(): Employee | null {
     return this.currentEmployee;
   }
 
   /**
-   * Establece el empleado actual
+   * Sets the current employee
    */
   setCurrentEmployee(employee: Employee | null): void {
     this.currentEmployee = employee;

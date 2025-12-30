@@ -3,7 +3,7 @@ import { EmployeeViewModel } from '../viewmodels/EmployeeViewModel.js';
 
 /**
  * Employee View
- * Maneja la interfaz de usuario y las interacciones
+ * Handles user interface and interactions
  */
 export class EmployeeView {
   private viewModel: EmployeeViewModel;
@@ -17,10 +17,9 @@ export class EmployeeView {
   }
 
   /**
-   * Inicializa la vista y registra eventos
+   * Initializes the view and logs events
    */
   private initialize(): void {
-    // Registrar callbacks del ViewModel
     this.viewModel.registerCallbacks({
       onEmployeesChanged: this.renderEmployeeList.bind(this),
       onLoadingChanged: this.handleLoadingState.bind(this),
@@ -28,25 +27,24 @@ export class EmployeeView {
       onSuccess: this.showSuccessMessage.bind(this)
     });
 
-    // Registrar eventos de botones
     this.registerEvents();
 
-    // Cargar empleados inicialmente
+    // Load employees initially
     this.viewModel.loadEmployees();
   }
 
   /**
-   * Registra todos los event listeners
+   * Register all event listeners
    */
   private registerEvents(): void {
-    // Título "Employees" - Volver al inicio y refrescar
+    // Title “Employees” - Back to top and refresh
     const titleLink = document.getElementById('title-link');
     titleLink?.addEventListener('click', () => {
       this.showList();
       this.viewModel.loadEmployees();
     });
 
-    // Breadcrumb "Employee" - Volver al inicio y refrescar
+    // Breadcrumb “Employee” - Back to top and refresh
     const breadcrumbHome = document.getElementById('breadcrumb-home');
     breadcrumbHome?.addEventListener('click', () => {
       this.showList();
@@ -61,29 +59,29 @@ export class EmployeeView {
     const newEmployeeBtnFab = document.getElementById('fab-new-employee');
     newEmployeeBtnFab?.addEventListener('click', () => this.showForm(false));
 
-    // Botón "Save" del formulario
+    // Botón "Save" of form
     const saveBtn = document.getElementById('save-btn');
     saveBtn?.addEventListener('click', () => this.handleSave());
 
-    // Botón "Cancel" del modal de confirmación
+    // Botón "Cancel" of the confirmation mode
     const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
     cancelDeleteBtn?.addEventListener('click', () => this.hideDeleteModal());
 
-    // Botón "Yes, Remove" del modal de confirmación
+    // Botón "Yes, Remove" of the confirmation mode
     const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
     confirmDeleteBtn?.addEventListener('click', () => this.confirmDelete());
 
-    // Formatear SSN automáticamente mientras se escribe
+    // Format SSN automatically while typing
     const ssnInput = document.getElementById('ssn-input') as HTMLInputElement;
     ssnInput?.addEventListener('input', (e) => this.formatSSN(e));
   }
 
   /**
-   * Formatea el SSN automáticamente (XXX-XX-XXXX)
+   * Format SSN automatically (XXX-XX-XXXX)
    */
   private formatSSN(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, ''); // Remover todo excepto dígitos
+    let value = input.value.replace(/\D/g, ''); //  Remove all but digits
     
     if (value.length > 9) {
       value = value.substring(0, 9);
@@ -99,7 +97,7 @@ export class EmployeeView {
   }
 
   /**
-   * Renderiza la lista de empleados
+   * Render the list of employees
    */
   private renderEmployeeList(employees: Employee[]): void {
     const tbody = document.getElementById('employees-tbody');
@@ -146,15 +144,13 @@ export class EmployeeView {
       </tr>
     `).join('');
 
-    // Registrar eventos de los botones de acción
     this.registerActionButtons();
   }
 
   /**
-   * Registra eventos de botones de editar y eliminar
+   * Logs edit and delete button eventsr
    */
   private registerActionButtons(): void {
-    // Botones de editar
     document.querySelectorAll('.edit-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = (e.currentTarget as HTMLElement).dataset.id;
@@ -162,7 +158,6 @@ export class EmployeeView {
       });
     });
 
-    // Botones de eliminar
     document.querySelectorAll('.delete-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         const id = (e.currentTarget as HTMLElement).dataset.id;
@@ -172,7 +167,7 @@ export class EmployeeView {
   }
 
   /**
-   * Muestra el formulario para crear o editar
+   * Displays the form to create or edit
    */
   private showForm(isEdit: boolean, employee?: Employee): void {
     this.currentView = 'form';
@@ -212,7 +207,7 @@ export class EmployeeView {
   }
 
   /**
-   * Muestra la vista de lista
+   *Displays the list view
    */
   private showList(): void {
     this.currentView = 'list';
@@ -231,7 +226,7 @@ export class EmployeeView {
   }
 
   /**
-   * Rellena el formulario con datos del empleado
+   * Fill in the form with employee data
    */
   private fillForm(employee: Employee): void {
     (document.getElementById('first-name-input') as HTMLInputElement).value = employee.firstName;
@@ -242,7 +237,7 @@ export class EmployeeView {
   }
 
   /**
-   * Limpia el formulario
+   * Clean of the form
    */
   private clearForm(): void {
     (document.getElementById('first-name-input') as HTMLInputElement).value = '';
@@ -252,9 +247,7 @@ export class EmployeeView {
     (document.getElementById('active-checkbox') as HTMLInputElement).checked = true;
   }
 
-  /**
-   * Maneja el evento de editar
-   */
+
   private async handleEdit(id: string): Promise<void> {
     const employee = await this.viewModel.loadEmployee(id);
     if (employee) {
@@ -263,7 +256,7 @@ export class EmployeeView {
   }
 
   /**
-   * Maneja el evento de guardar
+   *  Handles the save event
    */
   private async handleSave(): Promise<void> {
     const firstName = (document.getElementById('first-name-input') as HTMLInputElement).value.trim();
@@ -294,7 +287,7 @@ export class EmployeeView {
   }
 
   /**
-   * Maneja el evento de eliminar (muestra modal)
+   * Handles the delete event (modal display)
    */
   private handleDelete(id: string): void {
     this.editingEmployeeId = id;
@@ -302,7 +295,7 @@ export class EmployeeView {
   }
 
   /**
-   * Confirma la eliminación
+   * Confirms the elimination
    */
   private async confirmDelete(): Promise<void> {
     if (this.editingEmployeeId) {
@@ -313,7 +306,7 @@ export class EmployeeView {
   }
 
   /**
-   * Muestra el modal de confirmación de eliminación
+   * Displays the deletion confirmation modal
    */
   private showDeleteModal(): void {
     const modal = document.getElementById('delete-modal');
@@ -321,16 +314,14 @@ export class EmployeeView {
   }
 
   /**
-   * Oculta el modal de confirmación de eliminación
+   * Hidess the deletion confirmation modal
    */
   private hideDeleteModal(): void {
     const modal = document.getElementById('delete-modal');
     modal?.classList.add('hidden');
   }
 
-  /**
-   * Maneja el estado de carga
-   */
+
   private handleLoadingState(isLoading: boolean): void {
     const loader = document.getElementById('loader');
     if (isLoading) {
@@ -340,22 +331,18 @@ export class EmployeeView {
     }
   }
 
-  /**
-   * Muestra mensaje de error
-   */
+ 
   private showErrorMessage(message: string): void {
     this.showToast(message, 'error');
   }
 
-  /**
-   * Muestra mensaje de éxito
-   */
+
   private showSuccessMessage(message: string): void {
     this.showToast(message, 'success');
   }
 
   /**
-   * Muestra un toast notification
+   * Displays a toast notification
    */
   private showToast(message: string, type: 'success' | 'error'): void {
     const toast = document.createElement('div');
@@ -373,7 +360,7 @@ export class EmployeeView {
   }
 
   /**
-   * Escapa HTML para prevenir XSS
+   * HTML escaping to prevent XSS
    */
   private escapeHtml(text: string): string {
     const div = document.createElement('div');

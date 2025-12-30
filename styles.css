@@ -1,5 +1,5 @@
 /* ==========================================
-   VARIABLES Y RESET 
+   environment variables and global styles
    ========================================== */
 :root {
   --primary-color: #2375E2;
@@ -25,7 +25,6 @@
 }
 
 body {
-  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   background-color: var(--bg-light);
   color: var(--text-primary);
@@ -161,7 +160,7 @@ body {
 
 
 /* ==========================================
-   FLOATING ACTION BUTTON (MOBILE)
+   FLOATING ACTION BUTTON (MOBILE) FAB
    ========================================== */
 
 .fab {
@@ -198,14 +197,14 @@ body {
   user-select: none;
 }
 
-/* Ocultar checkbox nativo */
+
 .checkbox-container input {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-/* Caja exterior */
+
 .checkmark {
   width: 18px;
   height: 18px;
@@ -217,7 +216,7 @@ body {
   transition: border-color 0.08s ease;
 }
 
-/* Caja interior animada */
+/* Animated inner box */
 .checkmark::after {
   content: "";
   width: 10px;
@@ -229,7 +228,7 @@ body {
   transition: transform 0.08s ease-out;
 }
 
-/* Estado activo */
+/* Active status */
 .checkbox-container input:checked ~ .checkmark {
   border-color: var(--primary-color);
 }
@@ -254,9 +253,7 @@ body {
   background: white;
 }
 
-/* .employees-table thead {
-  background-color: var(--bg-light);
-} */
+
 
 .employees-table th {
   padding: 1rem;
@@ -266,7 +263,6 @@ body {
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  /* border-bottom: 2px solid var(--border-color); */
 }
 
 .employees-table td {
@@ -283,10 +279,7 @@ body {
   border-bottom: none;
 }
 
-/* .actions-cell {
-  display: flex;
-  gap: 0.5rem;
-} */
+
 
 /* ==========================================
    STATUS BADGE
@@ -430,7 +423,6 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  /* background: rgba(0, 0, 0, 0.2); */
 }
 
 .modal-content {
@@ -458,11 +450,9 @@ body {
 }
 
 .icon-text {
-  /* margin-bottom: 1rem; */
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  /* margin-bottom: 1.5rem; */
   text-align: left;
 }
 
@@ -595,7 +585,7 @@ body {
     gap: 0.5rem;
   }
 
-  /* Tabla responsive como tarjetas */
+   
   .table-container {
     border: none;
     border-radius: 0;
@@ -673,7 +663,7 @@ body {
     padding: 0.25rem 0.5rem;
   }
 
-  /* Formulario responsive */
+  /* Responsive form */
   .breadcrumb {
     font-size: 1.1rem;
   }
@@ -683,7 +673,7 @@ body {
   }
 
   .form-input {
-    font-size: 16px; /* Evita zoom en iOS */
+    font-size: 16px; /* Avoid zooming in iOS a */
   }
 
   .form-actions {
@@ -718,12 +708,12 @@ body {
   
 
 
-  /* Mostrar botón flotante */
+  /* Show floating button movil*/
   .fab {
     display: flex;
   }
 
-  /* Ocultar botón de nuevo empleado */
+  /* Hide new employee button  */
   #new-employee-btn {
     display: none;
   }
@@ -734,7 +724,7 @@ body {
 
 }
 
-/* Desktop grande */
+/* Desktop big */
 @media (min-width: 1400px) {
   .container {
     max-width: 1400px;
