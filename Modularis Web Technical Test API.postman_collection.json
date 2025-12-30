@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "deb94dd5-d645-4543-a8b0-571995a642e8",
+		"name": "Modularis Assesment",
+		"description": "This collection includes examples of using the Modularis REST API to execute CRUD operations on entities, collections, and entity object graphs, and also execute Server Commands on any Modularis-based on-premise or cloud-based service.  For the purposes of these examples, the HRDemo4 model and entities are used.  Please generate this model in order to test this API as-is.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2285959",
+		"_collection_link": "https://modularisaccelerator.postman.co/workspace/Prometheus~3631c867-f816-4cbc-857f-76a48fd69799/collection/2285959-deb94dd5-d645-4543-a8b0-571995a642e8?action=share&source=collection_link&creator=2285959"
+	},
+	"item": [
+		{
+			"name": "Activity Service",
+			"item": [
+				{
+					"name": "1. Creating Entities",
+					"item": [
+						{
+							"name": "Save a New Entity",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "CustomerID",
+										"value": "C93F949C-41B8-4C9E-95AA-B030B31F6F3F"
+									},
+									{
+										"key": "APIKey",
+										"value": "3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"PersonID\": \"fcc12c62-2782-45dd-bb36-07f5035d8679\",\n    \"FirstName\": \"William\",\n    \"LastName\": \"Gates2\",\n    \"LastUpdatedBy\": \"admin\",\n    \"LastUpdatedDate\": \"2022-01-20T16:00:06.1470000Z\",\n    \"SSN\": \"111-22-1111\",\n    \"EmployeeNo\": \"0001\",\n    \"EmploymentEndDate\": null,\n    \"EmploymentStartDate\": \"2000-01-01T05:00:00.0000000Z\",\n    \"Status\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://gateway.modularis.com/HRDemo/RESTActivityWebService/HRDemo.Example/Employees",
+									"protocol": "https",
+									"host": [
+										"gateway",
+										"modularis",
+										"com"
+									],
+									"path": [
+										"HRDemo",
+										"RESTActivityWebService",
+										"HRDemo.Example",
+										"Employees"
+									]
+								},
+								"description": "Saves an entity."
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "2. Retrieving Entities",
+					"item": [
+						{
+							"name": "Get Entity By Key",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "CustomerID",
+										"value": "C93F949C-41B8-4C9E-95AA-B030B31F6F3F"
+									},
+									{
+										"key": "APIKey",
+										"value": "3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP"
+									}
+								],
+								"url": {
+									"raw": "https://gateway.modularis.com/HRDemo/RESTActivityWebService/HRDemo.Example/Employees(fcc12c62-2782-45dd-bb36-07f5035d8679)",
+									"protocol": "https",
+									"host": [
+										"gateway",
+										"modularis",
+										"com"
+									],
+									"path": [
+										"HRDemo",
+										"RESTActivityWebService",
+										"HRDemo.Example",
+										"Employees(fcc12c62-2782-45dd-bb36-07f5035d8679)"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All",
+							"protocolProfileBehavior": {
+								"strictSSL": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "CustomerID",
+										"value": "C93F949C-41B8-4C9E-95AA-B030B31F6F3F"
+									},
+									{
+										"key": "APIKey",
+										"value": "3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP"
+									}
+								],
+								"url": {
+									"raw": "https://gateway.modularis.com/HRDemo/RESTActivityWebService/HRDemo.Example/Employees",
+									"protocol": "https",
+									"host": [
+										"gateway",
+										"modularis",
+										"com"
+									],
+									"path": [
+										"HRDemo",
+										"RESTActivityWebService",
+										"HRDemo.Example",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3. Updating Entities",
+					"item": [
+						{
+							"name": "Partial Update",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "CustomerID",
+										"value": "C93F949C-41B8-4C9E-95AA-B030B31F6F3F"
+									},
+									{
+										"key": "APIKey",
+										"value": "3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"PersonID\": \"fcc12c62-2782-45dd-bb36-07f5035d8679\",\n    \"FirstName\": \"William\",\n    \"LastName\": \"Gates\"\n}\n "
+								},
+								"url": {
+									"raw": "https://gateway.modularis.com/HRDemo/RESTActivityWebService/HRDemo.Example/Employees",
+									"protocol": "https",
+									"host": [
+										"gateway",
+										"modularis",
+										"com"
+									],
+									"path": [
+										"HRDemo",
+										"RESTActivityWebService",
+										"HRDemo.Example",
+										"Employees"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4. Deleting Entities",
+					"item": [
+						{
+							"name": "Delete Entity By Key",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "CustomerID",
+										"value": "C93F949C-41B8-4C9E-95AA-B030B31F6F3F"
+									},
+									{
+										"key": "APIKey",
+										"value": "3KpOasNPzyAufpKJOoHbixhMIlzcHAPnuw0VIP"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://gateway.modularis.com/HRDemo/RESTActivityWebService/HRDemo.Example/Employees(fcc12c62-2782-45dd-bb36-07f5035d8679)",
+									"protocol": "https",
+									"host": [
+										"gateway",
+										"modularis",
+										"com"
+									],
+									"path": [
+										"HRDemo",
+										"RESTActivityWebService",
+										"HRDemo.Example",
+										"Employees(fcc12c62-2782-45dd-bb36-07f5035d8679)"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

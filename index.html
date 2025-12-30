@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Loader / Spinner -->
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="container">
+    <!-- LIST VIEW -->
+    <div id="list-view" class="view">
+      <div class="header">
+        <h1 class="title" id="title-link" style="cursor: pointer;">Employees</h1>
+        <button id="new-employee-btn" class="btn btn-primary">NEW EMPLOYEE</button>
+      </div>
+
+      <div>
+        <table class="employees-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>FIRST NAME</th>
+              <th>LAST NAME</th>
+              <th>STATUS</th>
+              <th>ACTIONS</th>
+            </tr>
+          </thead>
+          <tbody id="employees-tbody">
+            <!-- Los empleados se cargarán dinámicamente aquí -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FORM VIEW -->
+    <div id="form-view" class="view hidden">
+      <div class="breadcrumb">
+        <span id="breadcrumb-home" style="cursor: pointer;">Employee</span>
+        <b id="breadcrumb-current"></b>
+      </div>
+
+
+      <form class="employee-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first-name-input">FIRST NAME</label>
+            <input tabindex="1" type="text" id="first-name-input" class="form-input" placeholder="John" required>
+          </div>
+
+          <div class="form-group">
+            <label for="last-name-input">LAST NAME</label>
+            <input tabindex="2" type="text" id="last-name-input" class="form-input" placeholder="Smith" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="id-input">ID</label>
+          <input tabindex="3" type="text" id="id-input" class="form-input" placeholder="14578956" required>
+        </div>
+
+        <div class="form-group">
+          <label for="ssn-input">SSN</label>
+          <input tabindex="4" type="text" id="ssn-input" class="form-input" placeholder="111-11-1111" maxlength="11" required>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label for="active-checkbox" class="checkbox-label">ACTIVE</label>
+
+          <label class="checkbox-container">
+            <input tabindex="5" type="checkbox" id="active-checkbox">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+
+        <div>
+          <div class="aline-save-btn">
+            <button tabindex="6" type="button" id="save-btn" class="btn btn-primary">SAVE</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div id="delete-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="document.getElementById('delete-modal').classList.add('hidden')"></div>
+    <div class="modal-content">
+      <div class="icon-text">
+        <div class="modal-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24">
+            <path d="M12 2L1 22h22L12 2z" fill="#D14D4D"/>
+            <rect x="11" y="8" width="2" height="7" fill="#FFFFFF"/>
+            <circle cx="12" cy="18" r="1.2" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <div class="modal-message">
+          <h3 class="modal-title">
+            Are you sure you want to remove this employee?
+          </h3>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="cancel-delete-btn" class="btn btn-secondary">CANCEL</button>
+        <button id="confirm-delete-btn" class="btn btn-danger">YES, REMOVE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Button Movil -->
+  <button id="fab-new-employee" class="fab">+</button>
+
+
+  <!-- Scripts -->
+  <script type="module" src="dist/main.js"></script>
+</body>
+</html>

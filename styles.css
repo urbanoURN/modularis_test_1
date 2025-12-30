@@ -1,0 +1,742 @@
+/* ==========================================
+   VARIABLES Y RESET 
+   ========================================== */
+:root {
+  --primary-color: #2375E2;
+  --danger-color: #D14D4D;
+  --success-color: #5cb85c;
+  --inactive-color: #FFFFFF;
+  --icon-hover-color: #cacfd4b7;
+  --active-color: #FFFFFF;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --border-color: #e0e0e0;
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 1rem;
+}
+
+/* ==========================================
+   LOADER
+   ========================================== */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   CONTAINER
+   ========================================== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  min-height: 600px;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0d6dfdb0;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
+}
+
+.btn-secondary {
+  background: none;
+  border: none;
+  color: #2375E2;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.action-btn:hover {
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+}
+
+.edit-btn:hover {
+  color: var(--icon-hover-color);
+}
+
+.delete-btn:hover {
+  color: var(--icon-hover-color);
+}
+
+.aline-save-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+/* ==========================================
+   FLOATING ACTION BUTTON (MOBILE)
+   ========================================== */
+
+.fab {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.fab:hover {
+  background-color: #0d6dfdb0;
+  box-shadow: 0 4px 8px rgba(74, 144, 226, 0.1);
+}
+
+
+/* ==========================================
+   CUSTOM CHECKBO
+   ========================================== */
+
+.checkbox-container {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Ocultar checkbox nativo */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Caja exterior */
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #EAEBEE;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.08s ease;
+}
+
+/* Caja interior animada */
+.checkmark::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 0.08s ease-out;
+}
+
+/* Estado activo */
+.checkbox-container input:checked ~ .checkmark {
+  border-color: var(--primary-color);
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+  transform: scale(1);
+}
+
+
+/* ==========================================
+   TABLE
+   ========================================== */
+.table-container {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+/* .employees-table thead {
+  background-color: var(--bg-light);
+} */
+
+.employees-table th {
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  /* border-bottom: 2px solid var(--border-color); */
+}
+
+.employees-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.employees-table tbody tr:hover {
+  background-color: var(--bg-light);
+}
+
+.employees-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* .actions-cell {
+  display: flex;
+  gap: 0.5rem;
+} */
+
+/* ==========================================
+   STATUS BADGE
+   ========================================== */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;     
+  height: 26px;        
+  padding: 0 0.75rem;  
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+.status-badge.active {
+  background-color: #48B97D;
+  color: var(--active-color);
+}
+
+.status-badge.inactive {
+  background-color: #D14D4D;
+  color: var(--inactive-color);
+}
+
+/* ==========================================
+   BREADCRUMB
+   ========================================== */
+.breadcrumb {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================
+   FORM
+   ========================================== */
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+}
+
+.employee-form {
+  max-width: auto;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.form-group.checkbox-group {
+  margin-bottom: 0;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-input:disabled {
+  background-color: var(--bg-light);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.checkbox-label {
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.form-actions {
+  margin-top: 2rem;
+}
+
+
+/* ==========================================
+   MODAL
+   ========================================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background: rgba(0, 0, 0, 0.2); */
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  border-radius: 6px;
+  padding: 1rem;
+  max-width: 350px;
+  width: 35%;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  animation: modalSlideIn 0.3s ease;
+
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon-text {
+  /* margin-bottom: 1rem; */
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  /* margin-bottom: 1.5rem; */
+  text-align: left;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ==========================================
+   TOAST NOTIFICATIONS
+   ========================================== */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: white;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  z-index: 10000;
+  max-width: 300px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-success {
+  background-color: var(--success-color);
+}
+
+.toast-error {
+  background-color: var(--danger-color);
+}
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .employees-table th,
+  .employees-table td {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .toast {
+    right: 1rem;
+    bottom: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .actions-aline-end {
+    display: flex;
+    width: auto;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .container {
+    padding: 1rem;
+    border-radius: 4px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.875rem;
+    margin: 1rem;
+  }
+
+  .actions-aline-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Tabla responsive como tarjetas */
+  .table-container {
+    border: none;
+    border-radius: 0;
+  }
+
+  .employees-table {
+    font-size: 0.875rem;
+  }
+
+  .employees-table thead {
+    display: none;
+  }
+
+  .employees-table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    background: white;
+  }
+
+  .employees-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border: none;
+    font-size: 0.875rem;
+  }
+
+  .employees-table td:before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+    min-width: 100px;
+  }
+
+  .employees-table td:first-child:before {
+    content: 'ID';
+  }
+
+  .employees-table td:nth-child(2):before {
+    content: 'FIRST NAME';
+  }
+
+  .employees-table td:nth-child(3):before {
+    content: 'LAST NAME';
+  }
+
+  .employees-table td:nth-child(4):before {
+    content: 'STATUS';
+  }
+
+  .employees-table td:nth-child(5):before {
+    content: 'ACTIONS';
+  }
+
+  .actions-cell {
+    justify-content: flex-end;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  
+
+
+  .status-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  /* Formulario responsive */
+  .breadcrumb {
+    font-size: 1.1rem;
+  }
+
+  .form-title {
+    font-size: 1.25rem;
+  }
+
+  .form-input {
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Modal responsive */
+  .modal-content {
+    width: 95%;
+    padding: 1.25rem;
+  }
+
+  .modal-title {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+
+  /* Toast responsive */
+  .toast {
+    right: 0.5rem;
+    left: 0.5rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+  
+
+
+  /* Mostrar botón flotante */
+  .fab {
+    display: flex;
+  }
+
+  /* Ocultar botón de nuevo empleado */
+  #new-employee-btn {
+    display: none;
+  }
+
+
+
+
+
+}
+
+/* Desktop grande */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+  }
+}
